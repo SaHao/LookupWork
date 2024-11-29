@@ -42,12 +42,16 @@ android {
 }
 
 dependencies {
-    // Retrofit
+    implementation(libs.androidx.recyclerview.recyclerview2)
+    implementation (libs.com.adjust.sdk.adjust.android12)
+    implementation(libs.com.android.installreferrer.installreferrer10)
+    implementation(libs.com.adjust.sdk.adjust.android.webbridge8)
+    implementation(libs.com.google.android.gms.play.services.ads.identifier6)
+    implementation(libs.com.adjust.sdk.adjust.android.meta.referrer3)
     implementation(libs.retrofit2.retrofit)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.adapter.rxjava3) // 如果你使用RxJava
     implementation(libs.kotlinx.coroutines.android) // 协程
-
     // OkHttp
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
