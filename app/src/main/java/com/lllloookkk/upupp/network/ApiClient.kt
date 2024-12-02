@@ -10,20 +10,19 @@ import retrofit2.Response
 object ApiClient {
     private val apiService = NetworkModule.creatService(ApiService::class.java)
 
-    fun getConfig(requestBody: RequestBody, callback: (Result<LookConfig>) -> Unit) {
+    fun getConfig(requestBody: RequestBody,  callback: ApiCallback) {
         apiService.getConfig(requestBody).enqueue(object : Callback<LookConfig> {
             override fun onResponse(call: Call<LookConfig>, response: Response<LookConfig>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        callback(Result.Success(it))
-                    } ?: callback(Result.Error(Exception("Response body is null")))
+                        callback.onSuccess(it)
+                    } ?: callback.onError(Exception("Response body is null"))
                 } else {
-                    callback(Result.Error(Exception("Error: ${response.code()}")))
+                    callback.onError(Exception("Error: ${response.code()}"))
                 }
             }
-
             override fun onFailure(call: Call<LookConfig>, t: Throwable) {
-                callback(Result.Error(Exception("Network error: ${t.message}")))
+                callback.onError(Exception("Network error: ${t.message}"))
             }
         })
     }

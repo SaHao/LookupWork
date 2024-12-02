@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit
 
 object NetworkModule {
     private const val BASE_URL = "http://xvtxpcjrka.execute-api.us-east-2.amazonaws.com/Prod/"
-
     private fun creatOKHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -20,15 +19,11 @@ object NetworkModule {
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS).build()
     }
-
     private fun creatRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl(BASE_URL).client(creatOKHttpClient())
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
-
     fun <T> creatService(serviceClass: Class<T>): T {
         return creatRetrofit().create(serviceClass)
     }
-
-
 }
