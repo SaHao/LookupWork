@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.adjust.sdk.Adjust
-import com.adjust.sdk.Adjust.getAttribution
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
@@ -15,10 +14,8 @@ import com.lllloookkk.upupp.bean.LookConfig
 import com.lllloookkk.upupp.bean.LookInfo
 import com.lllloookkk.upupp.network.ApiCallback
 import com.lllloookkk.upupp.network.ApiClient
-import com.lllloookkk.upupp.network.Result
 import com.lllloookkk.upupp.util.PreferencesUtil
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,10 +43,10 @@ class LookBeginAc : AppCompatActivity() {
                 "attributes" to PreferencesUtil.getString("attributes")
             )
             val requestBody = Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
-            ApiClient.getConfig(requestBody, object : ApiCallback {
-                override fun onSuccess(config: LookConfig) {
-                    if (config.code == 0) {
-                        PreferencesUtil.saveConfig("lookConfig", config)
+            ApiClient.getConfig(requestBody, object : ApiCallback<LookConfig> {
+                override fun onSuccess(result: LookConfig) {
+                    if (result.code == 0) {
+                        PreferencesUtil.saveConfig("lookConfig", result)
                         getInfo()
                     } else {
                         getConfig()
@@ -68,25 +65,19 @@ class LookBeginAc : AppCompatActivity() {
                 "attributes" to PreferencesUtil.getString("attributes")
             )
             val requestBody = Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
-            ApiClient.getInfo(requestBody) { result: Result<LookInfo> ->
-                when (result) {
-                    is Result.Success -> {
-                        if (result.data.code == 0) {
-                            PreferencesUtil.saveInfo("lookInfo", result.data)
-                            val intent = Intent(this@LookBeginAc, MainActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                            getInfo()
-                        }
-                    }
-
-                    is Result.Error -> {
+            ApiClient.getInfo(requestBody, object : ApiCallback<LookInfo> {
+                override fun onSuccess(result: LookInfo) {
+                    if (result.code == 0) {
+                        PreferencesUtil.saveInfo("lookInfo", result)
+                        startActivity(Intent(this@LookBeginAc,MainActivity::class.java))
+                    } else {
                         getInfo()
-                        println("Error: ${result.exception.message}")
                     }
-
                 }
-            }
+                override fun onError(e: Exception) {
+                    getInfo()
+                }
+            })
         }
     }
 
