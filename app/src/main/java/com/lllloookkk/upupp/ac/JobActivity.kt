@@ -1,21 +1,33 @@
 package com.lllloookkk.upupp.ac
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.lllloookkk.upupp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.lllloookkk.upupp.adapter.JobAdapter
+import com.lllloookkk.upupp.databinding.ActivityJobBinding
+import com.lllloookkk.upupp.util.ItemDecoration
+import com.lllloookkk.upupp.util.PreferencesUtil
 
 class JobActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityJobBinding
+    private lateinit var adapter: JobAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_job)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityJobBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //        enableEdgeToEdge()
+        val value = intent.getIntExtra("pos",0)
+        adapter= JobAdapter(this)
+        binding.jobRv.layoutManager= LinearLayoutManager(this)
+        binding.jobRv.addItemDecoration(
+            ItemDecoration(
+                20
+            )
+        )
+        binding.jobRv.adapter=adapter
+        adapter.updateData(PreferencesUtil.getInfo().data[value].descriptions,PreferencesUtil.getInfo().data[value].title)
+        binding.confirmButton.setOnClickListener {
+
         }
     }
 }

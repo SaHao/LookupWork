@@ -1,23 +1,40 @@
 package com.lllloookkk.upupp.ac
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.lllloookkk.upupp.adapter.LookAdapter
 import com.lllloookkk.upupp.databinding.ActivityMainBinding
+import com.lllloookkk.upupp.util.ItemDecoration
+import com.lllloookkk.upupp.util.PreferencesUtil
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),LookAdapter.OnItemClickListener{
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter:LookAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.txt1.text="测试机1"
-        binding.txt2.text="测试机2"
-        binding.txt3.text="测试机3"
-        binding.but1.setOnClickListener {
-            binding.txt1.text="改变1"
-            binding.txt3.text="改变3"
-            binding.txt2.text="改变2"
-        }
+        adapter= LookAdapter()
+        binding.mainRv.layoutManager=LinearLayoutManager(this)
+        binding.mainRv.addItemDecoration(ItemDecoration(40))
+        binding.mainRv.adapter=adapter
+        adapter.setListener(this)
+        adapter.updateData(PreferencesUtil.getInfo().data)
 
     }
+
+    override fun onItemClick(position: Int) {
+        val intent = Intent(this@MainActivity, JobActivity::class.java)
+        intent.putExtra("pos", position)
+        startActivity(intent)
+    }
+
+    override fun onConfirmClick(position: Int) {
+        val intent = Intent(this@MainActivity, JobActivity::class.java)
+        intent.putExtra("pos", position)
+        startActivity(intent)
+    }
+
 }

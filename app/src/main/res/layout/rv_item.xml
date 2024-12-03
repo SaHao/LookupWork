@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_shape"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:textAlignment="viewStart"
+        android:id="@+id/lable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/txt_shape"
+        android:paddingStart="15dp"
+        android:paddingTop="3dp"
+        android:visibility="gone"
+        android:paddingEnd="15dp"
+        android:paddingBottom="3dp"
+        android:text="标签小号居中"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:textAlignment="viewStart"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="C类标题文案(大号文字+加粗文案+自动分行)"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:textAlignment="viewStart"
+        android:id="@+id/sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="副标题1"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:textAlignment="viewStart"
+        android:id="@+id/sub_titles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="副标题2"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:textAlignment="viewStart"
+        android:id="@+id/special_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/txt_shape_black"
+        android:paddingStart="15dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="3dp"
+        android:text="特殊文案中号字体"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:gravity="center"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
+        android:text="按钮1"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+</LinearLayout>

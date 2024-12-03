@@ -9,27 +9,40 @@ import com.lllloookkk.upupp.bean.LookInfo
 object PreferencesUtil {
     private const val PREF_NAME = "app_look"
     private lateinit var sharedPreferences: SharedPreferences
+
     // 获取 SharedPreferences 实例
     fun init(context: Context) {
         if (!::sharedPreferences.isInitialized) {
-            sharedPreferences = context.applicationContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            sharedPreferences =
+                context.applicationContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         }
     }
 
-    fun saveConfig(settingName: String, settingValue: LookConfig): Boolean {
-        val gson = Gson()
-        val jsonStr = gson.toJson(settingValue)
+    fun saveConfig(settingName: String, settingValue: LookConfig) {
+        val jsonStr = Gson().toJson(settingValue)
         val editor = sharedPreferences.edit()
         editor.putString(settingName, jsonStr)
-        return editor.commit()
+        editor.apply()
     }
-    fun saveInfo(settingName: String, settingValue: LookInfo): Boolean {
-        val gson = Gson()
-        val jsonStr = gson.toJson(settingValue)
+
+    fun saveInfo(settingName: String, settingValue: LookInfo) {
+        val jsonStr = Gson().toJson(settingValue)
         val editor = sharedPreferences.edit()
         editor.putString(settingName, jsonStr)
-        return editor.commit()
+        editor.apply()
     }
+
+    fun getConfig(): LookConfig {
+        return Gson().fromJson(
+            sharedPreferences.getString("lookConfig", ""),
+            LookConfig::class.java
+        )
+    }
+
+    fun getInfo(): LookInfo {
+        return Gson().fromJson(sharedPreferences.getString("lookInfo", ""), LookInfo::class.java)
+    }
+
     // 存储字符串数据
     fun putString(key: String, value: String) {
         val editor = sharedPreferences.edit()

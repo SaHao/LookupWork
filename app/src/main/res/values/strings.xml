@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lookup</string>
+    <string name="tip1">Friendly Reminder:</string>
+    <string name="tip2">The post was published by a user of our platform, not an official post. Please note the authenticity of the post.</string>
 </resources>
