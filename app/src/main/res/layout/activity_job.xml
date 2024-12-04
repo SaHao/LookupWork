@@ -29,7 +29,7 @@
             android:layout_centerInParent="true"
             android:layout_toEndOf="@id/back"
             android:singleLine="true"
-            android:text="标题文字中号显示不玩直接用省略号代替掉他地地道道的"
+            android:text=""
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="18sp" />

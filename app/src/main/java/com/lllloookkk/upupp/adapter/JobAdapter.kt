@@ -19,7 +19,6 @@ class JobAdapter(private var contexts: Context) : RecyclerView.Adapter<JobAdapte
 
 
     private val items = ArrayList<Description>()
-    private lateinit var  title:String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = JobItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -44,8 +43,7 @@ class JobAdapter(private var contexts: Context) : RecyclerView.Adapter<JobAdapte
         }
     }
 
-    fun updateData(newItems: List<Description>,title:String) {
-        this.title=title
+    fun updateData(newItems: List<Description>) {
         this.items.clear()
         this.items.addAll(newItems)
         notifyDataSetChanged()

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lllloookkk.upupp.adapter.JobAdapter
 import com.lllloookkk.upupp.databinding.ActivityJobBinding
+import com.lllloookkk.upupp.dialog.DialogFour
 import com.lllloookkk.upupp.util.ItemDecoration
 import com.lllloookkk.upupp.util.PreferencesUtil
 
@@ -25,9 +26,11 @@ class JobActivity : AppCompatActivity() {
             )
         )
         binding.jobRv.adapter=adapter
-        adapter.updateData(PreferencesUtil.getInfo().data[value].descriptions,PreferencesUtil.getInfo().data[value].title)
+        adapter.updateData(PreferencesUtil.getInfo().data[value].descriptions)
         binding.confirmButton.setOnClickListener {
-
+            val dialog = DialogFour()
+            dialog.show(supportFragmentManager, "CustomDialog")
         }
+        binding.title.text=PreferencesUtil.getInfo().data[value].title
     }
 }
