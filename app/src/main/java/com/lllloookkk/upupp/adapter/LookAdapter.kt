@@ -11,8 +11,8 @@ import com.lllloookkk.upupp.util.PreferencesUtil
 class LookAdapter : RecyclerView.Adapter<LookAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
-        fun onConfirmClick(position: Int)
+        fun showDialogA(position: Int)
+        fun showJobAc(position: Int)
     }
 
     private val items = ArrayList<InfoData>()
@@ -37,20 +37,30 @@ class LookAdapter : RecyclerView.Adapter<LookAdapter.ViewHolder>() {
             if (item.type.equals("C", true)) {
                 binding.lable.visibility = View.VISIBLE
                 binding.lable.text = item.tag
+                binding.confirmButton.setOnClickListener {
+                    if (::listener.isInitialized)
+                        listener.showDialogA(position)
+                }
+                binding.root.setOnClickListener {
+                    if (::listener.isInitialized)
+                        listener.showJobAc(position)
+                }
+            }else{
+                binding.confirmButton.setOnClickListener {
+                    if (::listener.isInitialized)
+                        listener.showJobAc(position)
+                }
+                binding.root.setOnClickListener {
+                    if (::listener.isInitialized)
+                        listener.showJobAc(position)
+                }
             }
             binding.title.text = item.title
             binding.subTitle.text = item.company
             binding.subTitles.text = item.address
             binding.specialTxt.text = item.salary
             binding.confirmButton.text = PreferencesUtil.getConfig().data.actions.apply
-            binding.confirmButton.setOnClickListener {
-                if (::listener.isInitialized)
-                    listener.onConfirmClick(position)
-            }
-            binding.root.setOnClickListener {
-                if (::listener.isInitialized)
-                    listener.onItemClick(position)
-            }
+
         }
     }
 

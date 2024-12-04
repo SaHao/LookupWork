@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity(),LookAdapter.OnItemClickListener{
 
     }
 
-    override fun onItemClick(position: Int) {
+    override fun showDialogA(position: Int) {
         val intent = Intent(this@MainActivity, JobActivity::class.java)
         intent.putExtra("pos", position)
         startActivity(intent)
     }
 
-    override fun onConfirmClick(position: Int) {
+    override fun showJobAc(position: Int) {
         val intent = Intent(this@MainActivity, JobActivity::class.java)
         intent.putExtra("pos", position)
         startActivity(intent)
