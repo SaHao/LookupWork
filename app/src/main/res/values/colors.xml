@@ -6,4 +6,6 @@
     <color name="black_grey">#282828</color>
     <color name="main_bg">#04044D</color>
     <color name="bg_white">#F3F0F0</color>
+    <color name="feed_green">#0B4B11</color>
+    <color name="feed_blue">#131413</color>
 </resources>
