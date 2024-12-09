@@ -6,7 +6,7 @@
         <RelativeLayout
             android:id="@+id/topLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:background="@color/main_bg">
 
                 <ImageView
@@ -31,32 +31,75 @@
                     android:textColor="@color/white"
                     android:textSize="22sp" />
         </RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="50dp"
+            android:layout_above="@+id/dialogButton"
+            android:layout_below="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <TextView
+                    android:layout_gravity="center"
+                    android:textColor="@color/red"
+                    android:text="SUCCESS"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="VER:1.0.0"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="NAME"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="SHIJIEAN"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/gaid"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:text="34531535ffa-532523j-5235n2k35-5325n"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/dialogTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:background="@color/main_bg"
+            android:textSize="26sp"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/dialogMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogTitle" />
-
-        <Button
+            android:layout_centerHorizontal="true"
             android:id="@+id/dialogButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:text="OK"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialogMessage" />
+            android:text="Okay"/>
 
 
 </RelativeLayout>

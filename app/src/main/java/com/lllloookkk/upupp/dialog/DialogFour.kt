@@ -1,8 +1,8 @@
 package com.lllloookkk.upupp.dialog
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
+import android.text.style.TtsSpan.ARG_TEXT
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -10,37 +10,61 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.lllloookkk.upupp.databinding.DialogFourBinding
+import com.lllloookkk.upupp.util.PreferencesUtil
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+interface UpdateDialogUIListener {
+    fun onUpdateDialogUI()
+}
 
 class DialogFour : DialogFragment() {
-    private lateinit var _binding: DialogFourBinding
+    var binding: DialogFourBinding? = null
+
+    companion object {
+        private const val ARG_NAME = "name"
+
+        fun newInstance(name: String): DialogFour {
+            val args = Bundle()
+            args.putString(ARG_NAME, name)
+            val fragment = DialogFour()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding= DialogFourBinding.inflate(inflater,container,false)
-        _binding.dialogTitle.text = "Dialog Title"
-        _binding.dialogMessage.text = "This is a custom dialog using View Binding."
-
-        _binding.dialogButton.setOnClickListener {
+        binding = DialogFourBinding.inflate(inflater, container, false)
+        binding!!.name.text = arguments?.getString(ARG_NAME)
+        binding!!.gaid.text = PreferencesUtil.getString("gaid")
+        binding!!.time.text =
+            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
+        binding!!.dialogButton.setOnClickListener {
             dismiss()
         }
-        return _binding.root
+        return binding!!.root
     }
+
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(dpToPx(400f), dpToPx(400f)) // 宽度和高度以像素为单位
+        dialog?.window?.setLayout(dpToPx(380f), dpToPx(540f)) // 宽度和高度以像素为单位
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext())
             .setView(onCreateView(layoutInflater, null, savedInstanceState))
             .create()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
     }
-    fun dpToPx(dp: Float): Int {
+
+    private fun dpToPx(dp: Float): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             dp,

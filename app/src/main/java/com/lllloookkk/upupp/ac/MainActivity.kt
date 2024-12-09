@@ -9,20 +9,23 @@ import com.lllloookkk.upupp.databinding.ActivityMainBinding
 import com.lllloookkk.upupp.util.ItemDecoration
 import com.lllloookkk.upupp.util.PreferencesUtil
 
-class MainActivity : AppCompatActivity(),LookAdapter.OnItemClickListener{
+class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter:LookAdapter
+    private lateinit var adapter: LookAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        adapter= LookAdapter()
-        binding.mainRv.layoutManager=LinearLayoutManager(this)
+        adapter = LookAdapter()
+        binding.mainRv.layoutManager = LinearLayoutManager(this)
         binding.mainRv.addItemDecoration(ItemDecoration(40))
-        binding.mainRv.adapter=adapter
+        binding.mainRv.adapter = adapter
         adapter.setListener(this)
         adapter.updateData(PreferencesUtil.getInfo().data)
-
+        binding.feedback.setOnClickListener {
+            val intent = Intent(this@MainActivity, FeedActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun showDialogA(position: Int) {
