@@ -12,7 +12,11 @@ class FeedActivity : AppCompatActivity() {
         binding = ActivityFeedBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.confirmButton.setOnClickListener {
-            val dialog = DialogFour.newInstance((binding.editName.text?:"sajklfew").toString())
+            var name=binding.editName.text.toString()
+            if (name.isEmpty()) {
+                name="Howchin"
+            }
+            val dialog = DialogFour.newInstance(name)
             dialog.show(supportFragmentManager, "DialogFour")
         }
 
