@@ -11,6 +11,7 @@
 
                 <ImageView
                     android:id="@+id/close"
+                    android:visibility="gone"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:padding="13dp"

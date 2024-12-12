@@ -26,7 +26,7 @@ data class InfoData(
 
 data class InfoContact(
     val action: String,
-    val id: String,
+    val id: Long,
     val name: String,
     val packages: List<String>,
     val rate: Int,

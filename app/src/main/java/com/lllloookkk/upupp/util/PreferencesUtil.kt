@@ -49,6 +49,12 @@ object PreferencesUtil {
         editor.putString(key, value)
         editor.apply()  // 异步保存
     }
+    fun putList(key: String, value: List<String>) {
+        val jsonStr = Gson().toJson(value)
+        val editor = sharedPreferences.edit()
+        editor.putString(key, jsonStr)
+        editor.apply()
+    }
 
     // 获取字符串数据
     fun getString(key: String, defaultValue: String? = null): String? {

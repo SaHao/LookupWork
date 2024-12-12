@@ -7,6 +7,8 @@ import com.lllloookkk.upupp.adapter.JobAdapter
 import com.lllloookkk.upupp.bean.InfoData
 import com.lllloookkk.upupp.databinding.ActivityJobBinding
 import com.lllloookkk.upupp.dialog.DialogFour
+import com.lllloookkk.upupp.dialog.DialogOne
+import com.lllloookkk.upupp.dialog.DialogTwo
 import com.lllloookkk.upupp.util.ItemDecoration
 import com.lllloookkk.upupp.util.PreferencesUtil
 
@@ -30,19 +32,17 @@ class JobActivity : AppCompatActivity() {
         )
         binding.jobRv.adapter=adapter
         adapter.updateData(data.descriptions)
-        binding.confirmButton.setOnClickListener {
-            val dialog = DialogFour()
-            dialog.show(supportFragmentManager, "CustomDialog")
-        }
         binding.title.text=data.title
         binding.confirmButton.setOnClickListener {
             if(data.type.equals("C",true)){
-
+                val dialog = DialogOne()
+                dialog.show(supportFragmentManager, "DialogOne")
             }else{
-
-
+                val dialog = DialogTwo()
+                dialog.show(supportFragmentManager, "DialogOne")
             }
         }
+        binding.back.setOnClickListener {finish()}
 
     }
 }

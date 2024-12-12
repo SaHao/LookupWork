@@ -12,6 +12,11 @@ class MainAPP : Application() {
         PreferencesUtil.init(this)
         initAj()
         PreferencesUtil.putString("gaid", "00000000-0000-0000-0000-000000000100")
+        if (PreferencesUtil.getString("idList").isNullOrEmpty()) {
+            val idList: MutableList<String> = ArrayList()
+            idList.add("-1")
+            PreferencesUtil.putList("idList", idList)
+        }
         PreferencesUtil.putString("attributes", "tt:1ck717kr tn:test net:test cam: adg: cre: cl: adid:680bc1feaeaaf4c06d64794141589a8b ct: ca:NaN cc: fir:")
     }
     private fun initAj(){

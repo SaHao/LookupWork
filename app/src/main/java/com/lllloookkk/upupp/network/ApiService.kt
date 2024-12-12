@@ -1,5 +1,6 @@
 package com.lllloookkk.upupp.network
 
+import com.lllloookkk.upupp.bean.EventData
 import com.lllloookkk.upupp.bean.LookConfig
 import com.lllloookkk.upupp.bean.LookInfo
 import okhttp3.RequestBody
@@ -20,5 +21,5 @@ interface ApiService {
 
     @POST("lookup/s3j")
     @Headers("Content-Type:application/json")
-    fun postEvent(@Body requestBody: RequestBody): Call<Response>
+    fun postEvent(@Body requestBody: RequestBody): Call<EventData>
 }

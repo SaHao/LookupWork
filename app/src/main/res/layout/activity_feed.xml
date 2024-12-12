@@ -77,6 +77,7 @@
                 android:textSize="16sp" />
 
             <RelativeLayout
+                android:id="@+id/layout_one"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -84,15 +85,19 @@
 
                 <TextView
                     android:id="@+id/finish_one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:text="FINISH"
+                    android:text="Wating"
+                    android:enabled="false"
+                    android:background="@drawable/feed_shapes"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/select_one"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -116,6 +121,7 @@
                 android:textSize="16sp" />
 
             <RelativeLayout
+                android:id="@+id/layout_two"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -123,15 +129,19 @@
 
                 <TextView
                     android:id="@+id/finish_two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/feed_shapes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:text="FINISH"
+                    android:text="Wating"
+                    android:enabled="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/select_two"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -155,6 +165,7 @@
                 android:textSize="16sp" />
 
             <RelativeLayout
+                android:id="@+id/layout_three"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -162,15 +173,19 @@
 
                 <TextView
                     android:id="@+id/finish_three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/feed_shapes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:text="FINISH"
+                    android:text="Wating"
+                    android:enabled="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/select_three"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -194,6 +209,7 @@
                 android:textSize="16sp" />
 
             <RelativeLayout
+                android:id="@+id/layout_four"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -201,15 +217,19 @@
 
                 <TextView
                     android:id="@+id/finish_four"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:text="FINISH"
+                    android:text="Wating"
+                    android:enabled="false"
+                    android:background="@drawable/feed_shapes"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                   />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/select_four"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -233,6 +253,7 @@
                 android:textSize="16sp" />
 
             <RelativeLayout
+                android:id="@+id/layout_five"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
@@ -240,18 +261,22 @@
 
                 <TextView
                     android:id="@+id/finish_five"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/feed_shapes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:text="FINISH"
+                    android:text="Wating"
+                    android:enabled="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    />
 
                 <ImageView
                     android:id="@+id/select_five"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:visibility="gone"
                     android:layout_centerInParent="true"
                     android:background="@drawable/select" />
             </RelativeLayout>
@@ -281,15 +306,19 @@
 
                 <TextView
                     android:id="@+id/finish_six"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:text="FINISH"
+                    android:text="Wating"
+                    android:enabled="false"
+                    android:background="@drawable/feed_shapes"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/select_six"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -325,6 +354,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="SUBMIT"
+                android:enabled="false"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />

@@ -46,6 +46,7 @@ class LookAdapter : RecyclerView.Adapter<LookAdapter.ViewHolder>() {
                         listener.showJobAc(position)
                 }
             }else{
+                binding.lable.visibility = View.GONE
                 binding.confirmButton.setOnClickListener {
                     if (::listener.isInitialized)
                         listener.showJobAc(position)

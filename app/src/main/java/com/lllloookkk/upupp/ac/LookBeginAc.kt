@@ -14,6 +14,7 @@ import com.lllloookkk.upupp.bean.LookConfig
 import com.lllloookkk.upupp.bean.LookInfo
 import com.lllloookkk.upupp.network.ApiCallback
 import com.lllloookkk.upupp.network.ApiClient
+import com.lllloookkk.upupp.util.CommonUtil
 import com.lllloookkk.upupp.util.PreferencesUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +41,8 @@ class LookBeginAc : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val params = mapOf(
                 "gaid" to PreferencesUtil.getString("gaid"),
-                "attributes" to PreferencesUtil.getString("attributes")
+                "attributes" to PreferencesUtil.getString("attributes"),
+                "network" to CommonUtil.isVpnConnected(applicationContext)
             )
             val requestBody = Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
             ApiClient.getConfig(requestBody, object : ApiCallback<LookConfig> {
@@ -62,7 +64,8 @@ class LookBeginAc : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val params = mapOf(
                 "gaid" to PreferencesUtil.getString("gaid"),
-                "attributes" to PreferencesUtil.getString("attributes")
+                "attributes" to PreferencesUtil.getString("attributes"),
+                "network" to CommonUtil.isVpnConnected(applicationContext)
             )
             val requestBody = Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
             ApiClient.getInfo(requestBody, object : ApiCallback<LookInfo> {

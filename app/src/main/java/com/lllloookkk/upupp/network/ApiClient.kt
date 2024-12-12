@@ -1,5 +1,6 @@
 package com.lllloookkk.upupp.network
 
+import com.lllloookkk.upupp.bean.EventData
 import com.lllloookkk.upupp.bean.LookConfig
 import com.lllloookkk.upupp.bean.LookInfo
 import okhttp3.RequestBody
@@ -43,23 +44,23 @@ object ApiClient {
             }
         })
     }
-
-    fun postEvent(requestBody: RequestBody, callback: (Result<okhttp3.Response>) -> Unit) {
-        apiService.postEvent(requestBody).enqueue(object : Callback<okhttp3.Response> {
-            override fun onResponse(call: Call<okhttp3.Response>, response: Response<okhttp3.Response>) {
+    fun postEvent(requestBody: RequestBody, callback: ApiCallback<EventData>) {
+        apiService.postEvent(requestBody).enqueue(object : Callback<EventData> {
+            override fun onResponse(call: Call<EventData>, response: Response<EventData>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        callback(Result.Success(it))
-                    } ?: callback(Result.Error(Exception("Response body is null")))
+                        callback.onSuccess(it)
+                    } ?: callback.onError(Exception("Response body is null"))
                 } else {
-                    callback(Result.Error(Exception("Error: ${response.code()}")))
+                    callback.onError(Exception("Error: ${response.code()}"))
                 }
             }
-            override fun onFailure(call: Call<okhttp3.Response>, t: Throwable) {
-                callback(Result.Error(Exception("Network error: ${t.message}")))
+            override fun onFailure(call: Call<EventData>, t: Throwable) {
+                callback.onError(Exception("Network error: ${t.message}"))
             }
         })
     }
+
 
 
 }
