@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lllloookkk.upupp.R
 import com.lllloookkk.upupp.bean.Description
 import com.lllloookkk.upupp.databinding.JobItemBinding
+import com.lllloookkk.upupp.util.PreferencesUtil
 
 class JobAdapter(private var contexts: Context) : RecyclerView.Adapter<JobAdapter.ViewHolder>() {
 
@@ -40,6 +41,9 @@ class JobAdapter(private var contexts: Context) : RecyclerView.Adapter<JobAdapte
         fun bind(item: Description) {
             binding.title.text = item.title
             generateTextViews(binding.contentsLayout, item.contents)
+            if (PreferencesUtil.getConfig().data.rtl){
+                binding.root.layoutDirection=View.LAYOUT_DIRECTION_RTL
+            }
         }
     }
 

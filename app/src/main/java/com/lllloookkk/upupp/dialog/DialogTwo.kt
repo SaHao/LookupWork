@@ -32,6 +32,9 @@ class DialogTwo : DialogFragment() {
         binding!!.close.setOnClickListener {
             dismiss()
         }
+        if (PreferencesUtil.getConfig().data.rtl){
+            binding!!.root.layoutDirection=View.LAYOUT_DIRECTION_RTL
+        }
         return binding!!.root
     }
 

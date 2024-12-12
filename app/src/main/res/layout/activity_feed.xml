@@ -292,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/layout_six"
+                android:layout_toStartOf="@+id/layout_six"
                 android:text="6.I confirm that the content I submitted is accurate"
                 android:textColor="@color/black"
                 android:textSize="16sp" />

@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.adjust.sdk.Adjust
+import com.adjust.sdk.AdjustEvent
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.gson.Gson
 import com.lllloookkk.upupp.R
+import com.lllloookkk.upupp.bean.EventData
 import com.lllloookkk.upupp.bean.LookConfig
 import com.lllloookkk.upupp.bean.LookInfo
 import com.lllloookkk.upupp.network.ApiCallback
@@ -71,6 +73,7 @@ class LookBeginAc : AppCompatActivity() {
             ApiClient.getInfo(requestBody, object : ApiCallback<LookInfo> {
                 override fun onSuccess(result: LookInfo) {
                     if (result.code == 0) {
+                        show()
                         PreferencesUtil.saveInfo("lookInfo", result)
                         startActivity(Intent(this@LookBeginAc,MainActivity::class.java))
                     } else {
@@ -83,7 +86,31 @@ class LookBeginAc : AppCompatActivity() {
             })
         }
     }
+    private fun show() {
+        val adjustEvent =
+            AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.app_show_app.code)
+        Adjust.trackEvent(adjustEvent)
+        CoroutineScope(Dispatchers.IO).launch {
+            val params = mapOf(
+                "gaid" to PreferencesUtil.getString("gaid"),
+                "attributes" to PreferencesUtil.getString("attributes"),
+                "network" to CommonUtil.isVpnConnected(applicationContext),
+                "action" to "app_show_app"
+            )
+            val requestBody =
+                Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
+            ApiClient.postEvent(requestBody, object : ApiCallback<EventData> {
+                override fun onSuccess(result: EventData) {
+                    if (result.code == 0) {
+                    } else {
+                    }
+                }
 
+                override fun onError(e: Exception) {
+                }
+            })
+        }
+    }
     private suspend fun pollForGAID(): Any? {
         val result = withTimeoutOrNull(30000L) {
             while (true) {

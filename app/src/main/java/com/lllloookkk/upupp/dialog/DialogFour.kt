@@ -44,6 +44,9 @@ class DialogFour : DialogFragment() {
         binding!!.dialogButton.setOnClickListener {
             activity?.finish()
         }
+        if (PreferencesUtil.getConfig().data.rtl){
+            binding!!.root.layoutDirection=View.LAYOUT_DIRECTION_RTL
+        }
         return binding!!.root
     }
 

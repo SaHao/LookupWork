@@ -15,6 +15,8 @@ import com.lllloookkk.upupp.adapter.LookAdapter
 import com.lllloookkk.upupp.bean.EventData
 import com.lllloookkk.upupp.databinding.ActivityMainBinding
 import com.lllloookkk.upupp.dialog.DialogOne
+import com.lllloookkk.upupp.dialog.DialogThree
+import com.lllloookkk.upupp.dialog.DialogThree.DialogThreeListener
 import com.lllloookkk.upupp.network.ApiCallback
 import com.lllloookkk.upupp.network.ApiClient
 import com.lllloookkk.upupp.util.CommonUtil
@@ -27,10 +29,12 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
-    DialogOne.DialogOneListener {
+    DialogOne.DialogOneListener, DialogThreeListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: LookAdapter
     private var position: Int = 0
+    private lateinit var dialogA: DialogOne
+    private lateinit var dialogB: DialogThree
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -49,8 +53,9 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
 
     override fun showDialogA(position: Int) {
         this.position = position
-        val dialog = DialogOne()
-        dialog.show(supportFragmentManager, "DialogOne")
+        dialogA= DialogOne()
+        dialogA.show(supportFragmentManager, "DialogOne")
+        showPop()
     }
 
     override fun showJobAc(position: Int) {
@@ -59,8 +64,19 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
         startActivity(intent)
     }
 
+    override fun showCard(position: Int) {
+        showCard()
+    }
+
+    override fun showCardC(position: Int) {
+        showCardC()
+    }
+    override fun onDownload() {
+        popTwoButton()
+        downloadApp(PreferencesUtil.getInfo().data[position].contacts[0].store.url)
+    }
     fun isAppInstalled(packageName: String?): Boolean {
-        val packageManager: PackageManager = this@MainActivity.getPackageManager()
+        val packageManager: PackageManager = this@MainActivity.packageManager
         try {
             packageManager.getPackageInfo(packageName!!, PackageManager.GET_ACTIVITIES)
             return true
@@ -98,20 +114,9 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
                         invokeSuccess(PreferencesUtil.getInfo().data[position].contacts[0].id)
                     }
                 } else {
-//                    if (dialogC != null) {
-//                        dialogC.dismiss()
-//                    }
-//                    if (dialogA != null) {
-//                        dialogA.dismiss()
-//                    }
-//                    dialogB = DialogB(requireContext())
-//                    dialogB.setOnclickListener(object : BnOnclickListener() {
-//                        fun onClick() {
-//                            popTwoButton()
-//                            downloadApp(PreferencesUtil.getInfo().data[position].contacts[0].store.url)
-//                        }
-//                    })
-//                    dialogB.show()
+                    dialogA.dismiss()
+                    dialogB = DialogThree()
+                    dialogB.show(supportFragmentManager, "DialogThree")
                     popTwo()
                 }
             } else if (type.contains("tg")) {
@@ -140,20 +145,9 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
                         invokeSuccess(PreferencesUtil.getInfo().data[position].contacts[0].id)
                     }
                 } else {
-//                    if (dialogC != null) {
-//                        dialogC.dismiss()
-//                    }
-//                    if (dialogA != null) {
-//                        dialogA.dismiss()
-//                    }
-//                    dialogB = DialogB(requireContext())
-//                    dialogB.setOnclickListener(object : BnOnclickListener() {
-//                        fun onClick() {
-//                            popTwoButton()
-//                            downloadApp(PreferencesUtil.getInfo().data[position].contacts[0].store.url)
-//                        }
-//                    })
-//                    dialogB.show()
+                    dialogA.dismiss()
+                    dialogB = DialogThree()
+                    dialogB.show(supportFragmentManager, "DialogThree")
                     popTwo()
                 }
             } else {
@@ -262,7 +256,7 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
     }
 
     private fun postInvokeWs() {
-        val adjustEvent = AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.add_ws.code)
+        val adjustEvent = AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.addtocart_ws.code)
         Adjust.trackEvent(adjustEvent)
         CoroutineScope(Dispatchers.IO).launch {
             val params = mapOf(
@@ -287,7 +281,7 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
     }
 
     private fun postInvokeTg() {
-        val adjustEvent = AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.add_tg.code)
+        val adjustEvent = AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.addtocart_tg.code)
         Adjust.trackEvent(adjustEvent)
         CoroutineScope(Dispatchers.IO).launch {
             val params = mapOf(
@@ -336,7 +330,81 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
             })
         }
     }
+    private fun showPop() {
+        val adjustEvent =
+            AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.contact_show_popup.code)
+        Adjust.trackEvent(adjustEvent)
+        CoroutineScope(Dispatchers.IO).launch {
+            val params = mapOf(
+                "gaid" to PreferencesUtil.getString("gaid"),
+                "attributes" to PreferencesUtil.getString("attributes"),
+                "network" to CommonUtil.isVpnConnected(applicationContext),
+                "action" to "contact_show_popup"
+            )
+            val requestBody =
+                Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
+            ApiClient.postEvent(requestBody, object : ApiCallback<EventData> {
+                override fun onSuccess(result: EventData) {
+                    if (result.code == 0) {
+                    } else {
+                    }
+                }
 
+                override fun onError(e: Exception) {
+                }
+            })
+        }
+    }
+    private fun showCard() {
+        val adjustEvent =
+            AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.jobs_show_card.code)
+        Adjust.trackEvent(adjustEvent)
+        CoroutineScope(Dispatchers.IO).launch {
+            val params = mapOf(
+                "gaid" to PreferencesUtil.getString("gaid"),
+                "attributes" to PreferencesUtil.getString("attributes"),
+                "network" to CommonUtil.isVpnConnected(applicationContext),
+                "action" to "jobs_show_card"
+            )
+            val requestBody =
+                Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
+            ApiClient.postEvent(requestBody, object : ApiCallback<EventData> {
+                override fun onSuccess(result: EventData) {
+                    if (result.code == 0) {
+                    } else {
+                    }
+                }
+
+                override fun onError(e: Exception) {
+                }
+            })
+        }
+    }
+    private fun showCardC() {
+        val adjustEvent =
+            AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.jobs_show_ptjob.code)
+        Adjust.trackEvent(adjustEvent)
+        CoroutineScope(Dispatchers.IO).launch {
+            val params = mapOf(
+                "gaid" to PreferencesUtil.getString("gaid"),
+                "attributes" to PreferencesUtil.getString("attributes"),
+                "network" to CommonUtil.isVpnConnected(applicationContext),
+                "action" to "jobs_show_ptjob"
+            )
+            val requestBody =
+                Gson().toJson(params).toRequestBody("application/json".toMediaTypeOrNull())
+            ApiClient.postEvent(requestBody, object : ApiCallback<EventData> {
+                override fun onSuccess(result: EventData) {
+                    if (result.code == 0) {
+                    } else {
+                    }
+                }
+
+                override fun onError(e: Exception) {
+                }
+            })
+        }
+    }
     private fun popTwoButton() {
         val adjustEvent =
             AdjustEvent(PreferencesUtil.getConfig().data.report.adjust.click_download_btn.code)
@@ -403,4 +471,5 @@ class MainActivity : AppCompatActivity(), LookAdapter.OnItemClickListener,
             )
         }
     }
+
 }

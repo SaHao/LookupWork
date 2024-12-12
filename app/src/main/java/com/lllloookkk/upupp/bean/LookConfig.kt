@@ -50,8 +50,8 @@ data class Confirm(
 )
 
 data class Adjust(
-    val add_tg: AddTg,
-    val add_ws: AddWs,
+    val addtocart_tg: AddTg,
+    val addtocart_ws: AddWs,
     val addtocart_ok: AddtocartOk,
     val addtocartlt: Addtocartlt,
     val addtocartpv: Addtocartpv,

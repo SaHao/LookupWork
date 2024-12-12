@@ -41,6 +41,7 @@
         android:padding="20dp">
 
         <TextView
+            android:textAlignment="viewStart"
             android:id="@+id/txt_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:textAlignment="viewStart"
             android:id="@+id/txt_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,6 +63,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:textAlignment="viewStart"
             android:id="@+id/txt_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
